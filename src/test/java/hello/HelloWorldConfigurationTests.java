@@ -17,6 +17,7 @@ package hello;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,11 +41,18 @@ public class HelloWorldConfigurationTests {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    Application app = new Application();
+
     @Test
     public void testGreeting() throws Exception {
         ResponseEntity<String> entity = restTemplate
                 .getForEntity("http://localhost:" + this.port + "/", String.class);
         assertEquals(HttpStatus.OK, entity.getStatusCode());
+    }
+
+    @Test
+    public void testWelcome() throws Exception {
+        assertEquals("ayok", "Welcome",  app.welcome());
     }
 
 }
